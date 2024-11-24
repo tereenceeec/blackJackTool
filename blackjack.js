@@ -6,14 +6,16 @@ var trueCount = count / decksRemaining;
 
 // Function to update the true count
 function updateTrueCount() {
-  // Ensure no division by zero
-  if (decksRemaining > 0) {
-    trueCount = count / decksRemaining;
-  } else {
-    trueCount = 0;
+  // Ensure decksRemaining is never 0, default to 1 to avoid NaN
+  if (decksRemaining <= 0) {
+    decksRemaining = 1; // Prevent division by zero
   }
-  $(".true-count").html("True Count: " + trueCount.toFixed(2)); // display with 2 decimals
+  
+  // Now calculate true count
+  trueCount = count / decksRemaining;
+  $(".true-count").html("True Count: " + trueCount.toFixed(2)); // Display with 2 decimals
 }
+
 
 // Event listener for card clicks
 for (var i = 0; i < numberOfCards; i++) {
@@ -75,9 +77,13 @@ function updateDecksRemaining() {
   } else if (cardsRemaining <= 104 && cardsRemaining > 52) {
     decksRemaining = 2;
   } else {
-    decksRemaining = 1;
+    decksRemaining = 1; // Ensure at least 1 deck
   }
+
+  // Update true count after updating decks remaining
+  updateTrueCount();
 }
+
 
 // Reset button functionality
 $(".btnReset").addEventListener("click", function(e) {
