@@ -80,7 +80,7 @@ function updateDecksRemaining() {
 }
 
 // Reset button functionality
-$(".btnReset").click(function() {
+$(".btnReset").addEventListener("click", function(e) {
   count = 0;
   cardsRemaining = 312; // Reset to the total number of cards in your deck
   decksRemaining = 6; // Reset decks to 6
