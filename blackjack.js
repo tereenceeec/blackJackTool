@@ -37,10 +37,6 @@ document.addEventListener("keydown", function(e) {
 
 });
 
-
-$(".true-count").html("True Count: " + trueCount);
-
-
 if (cardsRemaining >= 261)
 {
   decksRemaining = 6
@@ -55,3 +51,5 @@ if (cardsRemaining >= 261)
 } else {
   decksRemaining = 1
 }
+
+$(".true-count").html("True Count: " + trueCount);
