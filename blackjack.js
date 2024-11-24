@@ -1,6 +1,9 @@
 var numberOfCards = $(".cards").length;
 var count = 0;
 var numberOfButtons = $("button").length;
+var cardsRemaining = 312;
+var decksRemaining = 0;
+var trueCount = count/decksRemaining;
 
 for (var i=0; i<numberOfCards; i++) {
   $(".cards")[i].addEventListener("click", function(e) {
@@ -35,22 +38,20 @@ document.addEventListener("keydown", function(e) {
 });
 
 
-for (var i=0; i<numberOfButtons; i++) {
-  $("button")[i].addEventListener("click", function(e) {
-    if ($(e.target).hasClass("btn1")){
-      $(".true-count").html("True Count: " + count);
-  }
-  else if ($(e.target).hasClass("btn2")){
-    $(".true-count").html("True Count: " + count/2);
-}
-  else if ($(e.target).hasClass("btn3")){
-    $(".true-count").html("True Count: " + (count/3).toFixed(2));
-}
-  else if ($(e.target).hasClass("btn4")){
-    $(".true-count").html("True Count: " + (count/4).toFixed(2));
-}
-  else if ($(e.target).hasClass("btn5")){
-    $(".true-count").html("True Count: " + (count/5).toFixed(2));
-}
-  });
+$(".true-count").html("True Count: " + trueCount);
+
+
+if (cardsRemaining >= 261)
+{
+  decksRemaining = 6
+} else if (cardsRemaining <= 260 && cardsRemaining > 208) {
+  decksRemaining = 5
+} else if (cardsRemaining <= 208 && cardsRemaining > 156) {
+  decksRemaining = 4
+} else if (cardsRemaining <= 156 && cardsRemaining > 104) {
+  decksRemaining = 3
+} else if (cardsRemaining <= 104 && cardsRemaining > 52) {
+  decksRemaining = 2
+} else {
+  decksRemaining = 1
 }
