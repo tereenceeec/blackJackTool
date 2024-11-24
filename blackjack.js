@@ -87,12 +87,17 @@ function updateDecksRemaining() {
 
 // Reset button functionality using vanilla JavaScript (addEventListener)
 document.querySelector(".btnReset").addEventListener("click", function() {
+  // Reset to initial values
   count = 0;
   cardsRemaining = 312; // Reset to the total number of cards in your deck
   decksRemaining = 6; // Reset decks to 6
+
+  // Update UI to show reset values
   document.querySelector(".counter").innerHTML = "Count: " + count;
-  
-  // Update true count after reset
+  document.querySelector(".true-count").innerHTML = "True Count: " + trueCount.toFixed(2);
+
+  // Recalculate the decks remaining based on the reset cardsRemaining
+  updateDecksRemaining();
   updateTrueCount();
 });
 
