@@ -1,16 +1,18 @@
 var numberOfCards = $(".cards").length;
 var count = 0;
-var numberOfButtons = $("button").length;
 var cardsRemaining = 312;
-var decksRemaining = 0;
+var decksRemaining = 6; // Set initial decks remaining based on 312 cards (6 decks)
 var trueCount = count / decksRemaining;
 
 // Function to update the true count
 function updateTrueCount() {
+  // Ensure no division by zero
   if (decksRemaining > 0) {
     trueCount = count / decksRemaining;
-    $(".true-count").html("True Count: " + trueCount.toFixed(2)); // display with 2 decimals
+  } else {
+    trueCount = 0;
   }
+  $(".true-count").html("True Count: " + trueCount.toFixed(2)); // display with 2 decimals
 }
 
 // Event listener for card clicks
@@ -33,6 +35,8 @@ for (var i = 0; i < numberOfCards; i++) {
       $(".counter").html("Count: " + count);
     }
 
+    // Update decks remaining and true count
+    updateDecksRemaining();
     updateTrueCount();
   });
 }
@@ -53,10 +57,12 @@ document.addEventListener("keydown", function(e) {
     cardsRemaining--;
   }
 
+  // Update decks remaining and true count
+  updateDecksRemaining();
   updateTrueCount();
 });
 
-// Determine the initial number of decks based on the number of cards remaining
+// Determine the number of decks remaining based on the number of cards left
 function updateDecksRemaining() {
   if (cardsRemaining >= 261) {
     decksRemaining = 6;
@@ -71,14 +77,15 @@ function updateDecksRemaining() {
   } else {
     decksRemaining = 1;
   }
-  updateTrueCount();
 }
 
 // Reset button functionality
 $(".btnReset").click(function() {
   count = 0;
   cardsRemaining = 312; // Reset to the total number of cards in your deck
-  updateDecksRemaining(); // Update decks remaining based on the reset cards remaining
+  decksRemaining = 6; // Reset decks to 6
   $(".counter").html("Count: " + count);
-  $(".true-count").html("True Count: " + trueCount.toFixed(2));
+  
+  // Update true count after reset
+  updateTrueCount();
 });
